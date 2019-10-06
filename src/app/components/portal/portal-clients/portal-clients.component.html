@@ -1,0 +1,128 @@
+<div class="row">
+  <div class="col-md-12 p-5">
+    <h3>Clients</h3>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum eaque repudiandae exercitationem assumenda
+      omnis
+      sequi.</p>
+    <button type="button" class="btn btn-primary btn-raised" data-toggle="modal" data-target="#new-client-modal">New Client</button>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 p-5">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">First</th>
+          <th scope="col">Last</th>
+          <th scope="col">City</th>
+          <th scope="col" colspan="2" style="width: 15%;">Handle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+          <td>
+            <button class="btn btn-success btn-raised" data-toggle="modal" data-target="#edit-client-modal">Edit</button>
+          </td>
+          <td>
+            <button class="btn btn-danger btn-raised" data-toggle="modal" data-target="#low-client-modal">Low</button>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>Jacob</td>
+          <td>Thornton</td>
+          <td>@fat</td>
+          <td>
+            <button class="btn btn-success btn-raised" data-toggle="modal" data-target="#edit-client-modal">Edit</button>
+          </td>
+          <td>
+            <button class="btn btn-danger btn-raised" data-toggle="modal" data-target="#low-client-modal">Low</button>
+          </td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td colspan="2">Larry the Bird</td>
+          <td>@twitter</td>
+          <td>
+            <button class="btn btn-success btn-raised" data-toggle="modal" data-target="#edit-client-modal">Edit</button>
+          </td>
+          <td>
+            <button class="btn btn-danger btn-raised" data-toggle="modal" data-target="#low-client-modal">Low</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="new-client-modal" tabindex="-1" role="dialog" aria-labelledby="new-client-modal-label"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="new-client-modal-label">New Client</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="SaveChanges()">Create</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="low-client-modal" tabindex="-1" role="dialog" aria-labelledby="low-client-modal-label"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="low-client-modal-label">Low client</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Are you sure?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="SaveChanges()">Apply</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="edit-client-modal" tabindex="-1" role="dialog" aria-labelledby="edit-client-modal-label"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="edit-client-modal-label">Edit client</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="SaveChanges()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

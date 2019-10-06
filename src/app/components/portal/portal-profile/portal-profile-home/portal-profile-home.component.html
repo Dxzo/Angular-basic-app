@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-3 col-md-2 col-xl-2 bd-sidebar">
+    <h5>My profile</h5>
+    <nav class="collapse bd-links" id="bd-docs-nav">
+
+      <div class="bd-toc-item">
+        <a class="bd-toc-link" [routerLink]="['./general']">
+          General
+        </a>
+      </div>
+
+      <div class="bd-toc-item ">
+        <a class="bd-toc-link" [routerLink]="['./configuration']">
+          Configuration
+        </a>
+      </div>
+
+      <div class="bd-toc-item">
+        <a class="bd-toc-link" [routerLink]="['./security']">
+          Security
+        </a>
+      </div>
+
+    </nav>
+
+  </div>
+
+  <div class="col-3 col-md-3 col-xl-10" role="main">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>

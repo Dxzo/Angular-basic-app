@@ -9,20 +9,23 @@
       </div>
 
       <div class="form-label-group">
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" autofocus="">
+        <input name="email" type="text" class="form-control" placeholder="Email address" autofocus="" [(ngModel)]="Email">
       </div>
       <br>
       <div class="form-label-group">
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password">
+        <input name="password" type="password" class="form-control" placeholder="Password" [(ngModel)]="Password">
       </div>
       <br>
-      <div class="checkbox mb-3">
+      <div class="mb-3">
         <label>
-          <input type="checkbox" value="remember-me"> Remember me
+          <input type="checkbox"> Remember me
         </label>
       </div>
+      <div *ngIf="ShowValidationAlert" class="alert alert-danger" role="alert">
+        complete the fields please
+      </div>
       <!-- <button class="btn btn-lg btn-primary btn-block btn-raised" type="submit">Sign in</button> -->
-      <a class="btn btn-lg btn-primary btn-block btn-raised" [routerLink]="['/portal/clients']">Sign in</a>
+      <a class="btn btn-lg btn-primary btn-block btn-raised" (click)="SignIn()">Sign in</a>
       <p class="mt-5 mb-3 text-muted text-center">© 2019</p>
     </form>
   </div>

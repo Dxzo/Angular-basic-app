@@ -4,7 +4,8 @@
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum eaque repudiandae exercitationem assumenda
       omnis
       sequi.</p>
-    <button type="button" class="btn btn-primary btn-raised" data-toggle="modal" data-target="#new-client-modal">New Client</button>
+    <button type="button" class="btn btn-primary btn-raised" data-toggle="modal" data-target="#new-client-modal" (click)="ShowModalCreateClient()">New
+      Client</button>
   </div>
 </div>
 
@@ -14,46 +15,27 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">City</th>
+          <th scope="col">Ruc</th>
+          <th scope="col">Razón social</th>
+          <th scope="col">Ubigeo</th>
+          <th scope="col">Domicilio fiscal</th>
           <th scope="col" colspan="2" style="width: 15%;">Handle</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
+        <tr *ngFor="let client of Clients; let i = index;">
+          <th scope="row">{{ i + 1 }}</th>
+          <td [innerText]="client.NUM_RUC_EMIS"></td>
+          <td [innerText]="client.NOM_RZN_SOC_EMIS"></td>
+          <td [innerText]="client.COD_UBI_EMIS"></td>
+          <td [innerText]="client.TXT_DMCL_FISC_EMIS"></td>
           <td>
-            <button class="btn btn-success btn-raised" data-toggle="modal" data-target="#edit-client-modal">Edit</button>
+            <button class="btn btn-success btn-raised" data-toggle="modal" data-target="#edit-client-modal"
+              (click)="ShowModalEditClient(client)">Edit</button>
           </td>
           <td>
-            <button class="btn btn-danger btn-raised" data-toggle="modal" data-target="#low-client-modal">Low</button>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-          <td>
-            <button class="btn btn-success btn-raised" data-toggle="modal" data-target="#edit-client-modal">Edit</button>
-          </td>
-          <td>
-            <button class="btn btn-danger btn-raised" data-toggle="modal" data-target="#low-client-modal">Low</button>
-          </td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td colspan="2">Larry the Bird</td>
-          <td>@twitter</td>
-          <td>
-            <button class="btn btn-success btn-raised" data-toggle="modal" data-target="#edit-client-modal">Edit</button>
-          </td>
-          <td>
-            <button class="btn btn-danger btn-raised" data-toggle="modal" data-target="#low-client-modal">Low</button>
+            <button class="btn btn-danger btn-raised" data-toggle="modal" data-target="#low-client-modal"
+              (click)="ShowModalDeleteClient(client)">Low</button>
           </td>
         </tr>
       </tbody>
@@ -61,7 +43,7 @@
   </div>
 </div>
 
-<!-- Modal -->
+<!-- New Client Modal -->
 <div class="modal fade" id="new-client-modal" tabindex="-1" role="dialog" aria-labelledby="new-client-modal-label"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -73,17 +55,42 @@
         </button>
       </div>
       <div class="modal-body">
-        ...
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>Ruc</label>
+            <input name="new_ruc" type="text" class="form-control" [(ngModel)]="CreateClientModal.NUM_RUC_EMIS">
+          </div>
+          <div class="form-group col-md-6">
+            <label>Razón social</label>
+            <input name="new_razon_social" type="text" class="form-control"
+              [(ngModel)]="CreateClientModal.NOM_RZN_SOC_EMIS">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Ubigeo</label>
+          <input name="new_ubigeo" type="text" class="form-control" [(ngModel)]="CreateClientModal.COD_UBI_EMIS">
+        </div>
+        <div class="form-group">
+          <label>Domicilio fiscal</label>
+          <input name="new_domicilio_fiscal" type="text" class="form-control"
+            [(ngModel)]="CreateClientModal.TXT_DMCL_FISC_EMIS">
+        </div>
+        <div class="alert alert-danger" *ngIf="ShowErrorAlert">
+          an error occurred in the creation
+        </div>
+        <div class="alert alert-success" *ngIf="ShowOkAlert">
+          the record was created correctly
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="SaveChanges()">Create</button>
+        <button type="button" class="btn btn-primary" (click)="CreateClient(CreateClientModal)">Create</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Modal -->
+<!-- Low Client Modal -->
 <div class="modal fade" id="low-client-modal" tabindex="-1" role="dialog" aria-labelledby="low-client-modal-label"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -96,16 +103,22 @@
       </div>
       <div class="modal-body">
         Are you sure?
+        <div class="alert alert-danger" *ngIf="ShowErrorAlert">
+          an error occurred in the delete
+        </div>
+        <div class="alert alert-success" *ngIf="ShowOkAlert">
+          the record was deleted correctly
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="SaveChanges()">Apply</button>
+        <button type="button" class="btn btn-primary" (click)="DeleteClient(DeleteClientModal)">Apply</button>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Modal -->
+<!-- Edit Client Modal -->
 <div class="modal fade" id="edit-client-modal" tabindex="-1" role="dialog" aria-labelledby="edit-client-modal-label"
   aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -117,11 +130,37 @@
         </button>
       </div>
       <div class="modal-body">
-        ...
+        <div class="form-row">
+          <input type="hidden" name="cod_cliente" [(ngModel)]="EditClientModal.NUM_COD_CLIENTE">
+          <div class="form-group col-md-6">
+            <label>Ruc</label>
+            <input name="edit_ruc" type="text" class="form-control" [(ngModel)]="EditClientModal.NUM_RUC_EMIS">
+          </div>
+          <div class="form-group col-md-6">
+            <label>Razón social</label>
+            <input name="edit_razon_social" type="text" class="form-control"
+              [(ngModel)]="EditClientModal.NOM_RZN_SOC_EMIS">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Ubigeo</label>
+          <input name="edit_ubigeo" type="text" class="form-control" [(ngModel)]="EditClientModal.COD_UBI_EMIS">
+        </div>
+        <div class="form-group">
+          <label>Domicilio fiscal</label>
+          <input name="edit_domicilio_fiscal" type="text" class="form-control"
+            [(ngModel)]="EditClientModal.TXT_DMCL_FISC_EMIS">
+        </div>
+        <div class="alert alert-danger" *ngIf="ShowErrorAlert">
+          Could not save changes, possibly nothing was modified or an internal error
+        </div>
+        <div class="alert alert-success" *ngIf="ShowOkAlert">
+          The changes were saved correctly
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="SaveChanges()">Save changes</button>
+        <button type="button" class="btn btn-primary" (click)="EditClient(EditClientModal)">Save changes</button>
       </div>
     </div>
   </div>
